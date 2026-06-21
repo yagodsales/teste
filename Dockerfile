@@ -1,4 +1,2 @@
 FROM alpine:latest
-
-# Run the echo command when the container starts
-CMD [echo, Hello, World!]
+CMD ["sh", "-c", "while true; do echo hello; sleep 30; done"]

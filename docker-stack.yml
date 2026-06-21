@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  app:
+    image: ${IMAGE}
+    ports:
+      - "8081:8080"
+    networks:
+      - app_net
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+
+networks:
+  app_net:
+    driver: overlay

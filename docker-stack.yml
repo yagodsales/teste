@@ -5,18 +5,18 @@ services:
     image: ${IMAGE}
     ports:
       - "8081:8080"
-    networks:
-      - app_net
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role == worker
       update_config:
         parallelism: 1
         delay: 10s
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.role == worker
+    networks:
+      - app_net
 
 networks:
   app_net:
